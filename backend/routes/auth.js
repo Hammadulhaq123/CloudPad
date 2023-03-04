@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User')
-// ...rest of the initial code omitted for simplicity.
 const { body, validationResult } = require('express-validator');
+// Adding bcrypt to use hashing;
+const bcrypt = require('bcrypt')
+// Adding JWT Authentication:
+const jwt = require('jsonwebtoken')
 
 
 
@@ -17,7 +20,7 @@ router.post(
     body('password', "Password must be more than 5 characters").isLength({ min: 5 }),
     async (req, res) => {
 
-
+        const JWT_SECRET = 'Iamasecret1!anddb#$depends&^onme'
 
         // Finds the validation errors in this request and wraps them in an object with handy functions
         // If there are errors return Bad request and errors
@@ -34,10 +37,17 @@ router.post(
             if (user) {
                 return res.status(400).json({ error: 'User with this email already exists' })
             }
+
+            // Bcrypt function to generate a salt
+            const salt = await bcrypt.genSalt(10);
+            // bcrypt function to generate a hash and concatenate salt to it
+            const secPass = await bcrypt.hash(req.body.password, salt);
+
+
             user = await User.create({
                 name: req.body.name,
                 email: req.body.email,
-                password: req.body.password,
+                password: secPass,
             })
 
 
@@ -45,8 +55,18 @@ router.post(
             //     console.log(err)
             //     res.json({ error: "Email already in use" })
             // })
+            const data = {
+                user: {
+                    id: user.id,
+                }
+            }
+            const authtoken = jwt.sign(data, JWT_SECRET)
+            // console.log(jwtData)
 
-            res.json(user)
+            // res.json(user._id)
+
+            // Sending  auth token in response
+            res.json({ authtoken })
 
         } catch (error) {
             console.error(error.message)
