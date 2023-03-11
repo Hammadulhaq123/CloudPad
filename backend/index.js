@@ -4,7 +4,7 @@ main();
 
 
 const app = express()
-const port = 3000
+const port = 7000
 
 // Middle Wear. This must've to be used inorder to use req.body in auth.js or any other route
 app.use(express.json())
