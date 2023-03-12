@@ -11,17 +11,38 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+form {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+form div {
+  margin-left: 5px;
+  width: 99%;
+
+
+}
+
+form input {
+  width: 100%;
 }
 
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
