@@ -20,7 +20,7 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-form {
+/* form {
   width: 100%;
   padding: 0;
   display: flex;
@@ -28,15 +28,15 @@ form {
 }
 
 form div {
-  margin-left: 5px;
-  width: 99%;
+  margin: 15px;
+  width: 95%;
 
 
 }
 
 form input {
   width: 100%;
-}
+} */
 
 @keyframes logo-spin {
   from {

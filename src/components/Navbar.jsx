@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { AppBar, Button, IconButton, Stack, Toolbar, Typography, MenuItem, Menu } from '@mui/material'
+import { AppBar, Button, Box, IconButton, Stack, Toolbar, Typography } from '@mui/material'
 import { DocumentScanner } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -10,16 +10,18 @@ const Navbar = () => {
 
     }, [location]);
     return (
-        <AppBar sx={{ background: '#191a19' }}>
+        <AppBar sx={{ height: '9vh', background: '#191a19' }}>
             <Toolbar>
-                <IconButton size='large' edge='start' color='primary' aria-label='logo'>
-                    <DocumentScanner />
-                </IconButton>
-                <Typography variant='h5' component='div' color='primary' sx={{ flexGrow: 1 }}><Link to='/'><Button color='warning'>CloudPad</Button></Link></Typography>
+                <Box display='flex' justifyContent='center' alignItems='center'>
+                    <IconButton size='large' edge='start' color='primary' aria-label='logo'>
+                        <DocumentScanner />
+                    </IconButton>
+                    <Typography variant='h5' component='div' color='primary' sx={{ flexGrow: 1 }}><Link to='/' ><Button color='warning' >CloudPad</Button></Link></Typography>
+                </Box>
 
-                <Stack direction='row' spacing={2}>
-                    <Link to='/'><Button variant={`${location.pathname === "/" ? "contained" : "outlined"}`} color='warning'>Home</Button></Link>
-                    <Link to='/about'><Button variant={`${location.pathname === "/about" ? "contained" : "outlined"}`} color='primary'>About</Button></Link>
+                <Stack direction='row' spacing={2} sx={{ marginLeft: 'auto' }}>
+                    <Link to='/'><Button variant={`${location.pathname === "/" ? "contained" : "outlined"}`} size='small' color='warning'>Home</Button></Link>
+                    <Link to='/about'><Button variant={`${location.pathname === "/about" ? "contained" : "outlined"}`} size='small' color='primary'>About</Button></Link>
                 </Stack>
 
             </Toolbar>
